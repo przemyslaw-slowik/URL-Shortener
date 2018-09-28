@@ -1,0 +1,53 @@
+.online-form input[type="url"] {
+    width: 95%;
+}
+
+.online-form button {
+    right: 0;
+}
+
+.text-danger {
+    color: #ff2b2b;
+}
+
+#ShortUrl {
+    width: 35%;
+    height: 35px;
+}
+
+.label {
+    font-weight: 500;
+    line-height: 3;
+}
+
+.btn-info {
+    background-color: #29ca8e;
+    border-color: #29ca8e;
+}
+
+#home {
+    padding-top: 0;
+    background: none;
+}
+
+.home-info {
+    margin-top: 0;
+}
+
+@media screen and (max-width: 480px) {
+
+    .online-form input[type="url"],
+    .online-form .form-control,
+    #ShortUrl {
+        width: 85%;
+    }
+}
+
+.error-page {
+    text-align: center;
+}
+
+.error-font {
+    font-family: 'Showcard Gothic';
+    font-size: 8em;
+}

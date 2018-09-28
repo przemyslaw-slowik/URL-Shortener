@@ -1,0 +1,53 @@
+﻿@model IEnumerable<UrlModel>
+
+@{
+    ViewData["Title"] = "URL Stats";
+    ViewData["Menu"] = "navbar custom-navbar navbar-fixed-top top-nav-collapse";
+}
+
+<!-- FEATURE -->
+<section id="feature" data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h2>@ViewData["Title"]</h2>
+                </div>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Custom name
+                        </th>
+                        <th>
+                            Url
+                        </th>
+                        <th>
+                            Clicks
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var url in Model)
+                    {
+                        <tr>
+                            <td>
+                                @url.ShortUrl
+                            </td>
+                            <td>
+                                @((url.Url.Length < 50) ? url.Url.Substring(0, url.Url.Length) : $"{url.Url.Substring(0, 50)}...")
+                            </td>
+                            <td>
+                                @url.Hits
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>

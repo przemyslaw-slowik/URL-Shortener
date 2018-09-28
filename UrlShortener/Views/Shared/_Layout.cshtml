@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Domain"] = "mc-csgo.ovh";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"] - @ViewData["Domain"]</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="team" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <environment include="Development">
+        <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="~/node_modules/owl.carousel/dist/assets/owl.carousel.css" rel="stylesheet" />
+        <link href="~/node_modules/owl.carousel/dist/assets/owl.theme.default.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+              asp-fallback-href="~/node_modules/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+              integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous"
+              asp-fallback-href="~/node_modules/font-awesome/css/font-awesome.min.css" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+              integrity="sha256-UhQQ4fxEeABh4JrcmAJ1+16id/1dnlOEVCFOxDef9Lw=" crossorigin="anonymous"
+              asp-fallback-href="~/node_modules/owl.carousel/dist/assets/owl.carousel.min.css" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+              integrity="sha256-kksNxjDRxd/5+jGurZUJd1sdR2v+ClrCl3svESBaJqw=" crossorigin="anonymous"
+              asp-fallback-href="~/node_modules/owl.carousel/dist/assets/owl.theme.default.min.css" />
+    </environment>
+
+    <!-- MAIN CSS -->
+    <environment include="Development">
+        <link href="~/css/tooplate-style.css" rel="stylesheet" />
+        <link href="~/css/custom.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="Development">
+        <link href="~/css/tooplate-style.min.css" rel="stylesheet" />
+        <link href="~/css/custom.min.css" rel="stylesheet" />
+    </environment>
+
+</head>
+<body>
+
+    <!-- PRE LOADER -->
+    <section class="preloader">
+        <div class="spinner">
+
+            <span class="spinner-rotate"></span>
+
+        </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="@ViewData["Menu"]" role="navigation">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                </button>
+
+                <!-- lOGO TEXT HERE -->
+                <a asp-area="" asp-controller="Url" asp-action="Index" class="navbar-brand">URL Shortener</a>
+            </div>
+
+            <!-- MENU LINKS -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Url" asp-action="Index">Create</a></li>
+                    <li><a asp-area="" asp-controller="Url" asp-action="Stats">Stats</a></li>
+                    <li><a asp-area="" asp-controller="Url" asp-action="Github">Github</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a asp-area="" asp-controller="" asp-action="">Copyright &copy; @DateTime.UtcNow.Year - @ViewData["Domain"]</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    @RenderBody()
+
+    <!-- SCRIPTS -->
+
+    <environment include="Development">
+        <script src="~/node_modules/jquery/dist/jquery.js"></script>
+        <script src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/node_modules/jquery.stellar/jquery.stellar.js"></script>
+        <script src="~/node_modules/owl.carousel/dist/owl.carousel.js"></script>
+        <script src="~/js/smoothscroll.js"></script>
+        <script src="~/js/custom.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+                integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"
+                asp-fallback-src="~/node_modules/jquery/dist/jquery.min.js">
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
+                asp-fallback-src="~/node_modules/bootstrap/dist/js/bootstrap.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stellar.js/0.6.2/jquery.stellar.min.js" 
+                integrity="sha256-aQ6KGDKk7w8XQNZsQaQnbfeC//XPUIphSp/X/ZEwtV0=" crossorigin="anonymous"
+                asp-fallback-src="~/js/jquery.stellar.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+                integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"
+                asp-fallback-src="~/node_modules/owl.carousel/dist/owl.carousel.min.js">
+        </script>
+        <script src="~/js/smoothscroll.min.js"></script>
+        <script src="~/js/custom.min.js"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

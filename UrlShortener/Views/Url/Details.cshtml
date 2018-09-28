@@ -1,0 +1,26 @@
+﻿@model UrlModel
+@{
+    ViewData["Domain"] = "mc-csgo.ovh";
+    ViewData["Title"] = "URL Details";
+    ViewData["Menu"] = "navbar custom-navbar navbar-fixed-top";
+}
+
+<section id="home" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6 col-sm-12">
+                <div class="home-info">
+                    <h3>@ViewData["Domain"]</h3>
+                    <h1>Congratz!</h1>
+                    <div class="online-form">
+                        <div class="form-group">
+                            <input type="url" class="form-control" value="http://@ViewData["Domain"]/@Model.ShortUrl" id="customUrl" />
+                            <button onclick="urlCopyToClipboard('customUrl', 'copy')" id="copy" class="form-control">Copy URL</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
