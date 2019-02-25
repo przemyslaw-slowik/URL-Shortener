@@ -3,6 +3,12 @@
 @{
     ViewData["Title"] = "URL Stats";
     ViewData["Menu"] = "navbar custom-navbar navbar-fixed-top top-nav-collapse";
+
+    var firstDisabled = !Model.HasFirstPage ? "disabled" : "";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var lastDisabled = !Model.HasLastPage ? "disabled" : "";
+    var showPagination = Model.PageIndex > Model.TotalPages ? "hidden" : "";
 }
 
 <!-- FEATURE -->
@@ -48,20 +54,21 @@
                 </tbody>
             </table>
             <div>
-                <ul class="pagination">
-                    <li class="page-item @(!Model.HasFirstPage? "disabled":"")">
-                        <a asp-route-page="1" class="page-link"><i class="glyphicon glyphicon-fast-backward"></i></a>
+                <ul class="pagination @showPagination">
+                    <li class="@firstDisabled">
+                        <a asp-action="Stats" asp-route-page="1" class="btn btn-default @firstDisabled"><i class="glyphicon glyphicon-fast-backward"></i></a>
                     </li>
-
-                    <li class="page-item @(!Model.HasPreviousPage? "disabled":"")">
-                        <a asp-route-page="@(Model.PageIndex -1)" class="page-link"><i class="glyphicon glyphicon-step-backward"></i></a>
+                    <li class="@prevDisabled">
+                        <a asp-action="Stats" asp-route-page="@(Model.PageIndex -1)" class="btn btn-default @prevDisabled"><i class="glyphicon glyphicon-step-backward"></i></a>
                     </li>
-                    <li class="page-item  @(!Model.HasNextPage? "disabled":"")">
-                        <a asp-route-page="@(Model.PageIndex + 1)" class="page-link"><i class="glyphicon glyphicon-step-forward"></i></a>
+                    <li>
+                        <a>@Model.PageIndex</a>
                     </li>
-
-                    <li class="page-item  @(!Model.HasLastPage? "disabled":"")">
-                        <a asp-route-page="@Model.TotalPages" class="page-link"><i class="glyphicon glyphicon-fast-forward"></i></a>
+                    <li class="@nextDisabled">
+                        <a asp-action="Stats" asp-route-page="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled"><i class="glyphicon glyphicon-step-forward"></i></a>
+                    </li>
+                    <li class="@lastDisabled">
+                        <a asp-action="Stats" asp-route-page="@Model.TotalPages" class="btn btn-default @lastDisabled"><i class="glyphicon glyphicon-fast-forward"></i></a>
                     </li>
                 </ul>
             </div>

@@ -23,9 +23,14 @@ namespace UrlShortener.Controllers
 
         public async Task<IActionResult> Stats(int? page)
         {
+            if (page.HasValue && page <= 0)
+            {
+                return RedirectToAction(nameof(Stats));
+            }
+
             var urls = from urlModel in _urlModelData.GetAll()
-                           select urlModel;
-            
+                       select urlModel;
+
             int pageSize = 100;
             return View(await PaginatedList<UrlModel>.CreateAsync(urls.AsNoTracking(), page ?? 1, pageSize));
         }
