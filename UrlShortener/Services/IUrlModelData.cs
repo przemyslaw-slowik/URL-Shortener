@@ -8,7 +8,7 @@ namespace UrlShortener.Services
 {
     public interface IUrlModelData
     {
-        IEnumerable<UrlModel> GetAll();
+        IQueryable<UrlModel> GetAll();
         UrlModel Get(int id);
         UrlModel Get(string shortUrl);
         UrlModel Add(UrlModel urlModel);
