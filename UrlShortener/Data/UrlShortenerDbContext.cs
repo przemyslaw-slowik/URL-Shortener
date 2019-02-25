@@ -11,7 +11,7 @@ namespace UrlShortener.Data
     {
         public DbSet<UrlModel> Urls { get; set; }
 
-        public UrlShortenerDbContext(DbContextOptions options) : base(options)
+        public UrlShortenerDbContext(DbContextOptions<UrlShortenerDbContext> options) : base(options)
         {
         }
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using UrlShortener.Models;
 using UrlShortener.Services;
 using UrlShortener.ViewModels;
@@ -13,18 +14,20 @@ namespace UrlShortener.Controllers
 {
     public class UrlController : Controller
     {
-        private IUrlModelData _urlModelData;
+        private readonly IUrlModelData _urlModelData;
 
         public UrlController(IUrlModelData urlModelData)
         {
             _urlModelData = urlModelData;
         }
 
-        public IActionResult Stats()
+        public async Task<IActionResult> Stats(int? page)
         {
-            var model = _urlModelData.GetAll();
-
-            return View(model);
+            var urls = from urlModel in _urlModelData.GetAll()
+                           select urlModel;
+            
+            int pageSize = 100;
+            return View(await PaginatedList<UrlModel>.CreateAsync(urls.AsNoTracking(), page ?? 1, pageSize));
         }
 
         public IActionResult Index()
