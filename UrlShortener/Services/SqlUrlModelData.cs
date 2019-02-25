@@ -40,9 +40,9 @@ namespace UrlShortener.Services
             return _context.Urls.FirstOrDefault(x => x.ShortUrl == shortUrl);
         }
 
-        public IEnumerable<UrlModel> GetAll()
+        public IQueryable<UrlModel> GetAll()
         {
-            return _context.Urls.OrderBy(x => x.Id);
+            return _context.Urls;
         }
 
         public UrlModel Update(UrlModel urlModel)

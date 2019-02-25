@@ -12,6 +12,12 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseNodeModules(this IApplicationBuilder app, string root)
         {
             var path = Path.Combine(root, "node_modules");
+
+            if (!Directory.Exists(path))
+            {
+                throw new NotImplementedException("Directory node_modules not found.");
+            }
+
             var fileProvider = new PhysicalFileProvider(path);
 
             var options = new StaticFileOptions();

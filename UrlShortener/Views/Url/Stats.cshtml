@@ -1,8 +1,14 @@
-﻿@model IEnumerable<UrlModel>
+﻿@model PaginatedList<UrlModel>
 
 @{
     ViewData["Title"] = "URL Stats";
     ViewData["Menu"] = "navbar custom-navbar navbar-fixed-top top-nav-collapse";
+
+    var firstDisabled = !Model.HasFirstPage ? "disabled" : "";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var lastDisabled = !Model.HasLastPage ? "disabled" : "";
+    var showPagination = Model.PageIndex > Model.TotalPages ? "hidden" : "";
 }
 
 <!-- FEATURE -->
@@ -47,7 +53,25 @@
                     }
                 </tbody>
             </table>
-
+            <div>
+                <ul class="pagination @showPagination">
+                    <li class="@firstDisabled">
+                        <a asp-action="Stats" asp-route-page="1" class="btn btn-default @firstDisabled"><i class="glyphicon glyphicon-fast-backward"></i></a>
+                    </li>
+                    <li class="@prevDisabled">
+                        <a asp-action="Stats" asp-route-page="@(Model.PageIndex -1)" class="btn btn-default @prevDisabled"><i class="glyphicon glyphicon-step-backward"></i></a>
+                    </li>
+                    <li>
+                        <a>@Model.PageIndex</a>
+                    </li>
+                    <li class="@nextDisabled">
+                        <a asp-action="Stats" asp-route-page="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled"><i class="glyphicon glyphicon-step-forward"></i></a>
+                    </li>
+                    <li class="@lastDisabled">
+                        <a asp-action="Stats" asp-route-page="@Model.TotalPages" class="btn btn-default @lastDisabled"><i class="glyphicon glyphicon-fast-forward"></i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
