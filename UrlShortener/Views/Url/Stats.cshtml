@@ -44,7 +44,7 @@
                                 @url.ShortUrl
                             </td>
                             <td>
-                                @((url.Url.Length < 50) ? url.Url.Substring(0, url.Url.Length) : $"{url.Url.Substring(0, 50)}...")
+                                <a href="@url.Url">@((url.Url.Length < 50) ? url.Url.Substring(0, url.Url.Length) : $"{url.Url.Substring(0, 50)}...")</a>
                             </td>
                             <td>
                                 @url.Hits
