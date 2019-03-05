@@ -56,3 +56,10 @@ function urlCopyToClipboard(customUrl, button) {
     var text = document.getElementById(button).firstChild;
     text.data = "Copied!";
 }
+
+window.onload = function () {
+    var $recaptcha = document.querySelector('#g-recaptcha-response');
+    if ($recaptcha) {
+        $recaptcha.setAttribute("required", "required");
+    };
+}

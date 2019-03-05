@@ -1,6 +1,8 @@
-﻿@{
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration _config;
+
+@{
     ViewData["Domain"] = "mc-csgo.ovh";
-    ViewData["gtag"] = "UA-103077041-2";
+    ViewData["GlobalSiteTag"] = @_config["GlobalSiteTag"];
 }
 
 <!DOCTYPE html>
@@ -17,12 +19,12 @@
 
     <environment exclude="Development">
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=@ViewData["gtag"]"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=@ViewData["GlobalSiteTag"]"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
-            gtag('config', '@ViewData["gtag"]');
+            gtag('config', '@ViewData["GlobalSiteTag"]');
         </script>
     </environment>
 

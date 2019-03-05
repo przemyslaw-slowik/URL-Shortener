@@ -1,9 +1,11 @@
-﻿@model UrlModel
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration _config;
+@model UrlModel
 
 @{
     ViewData["Title"] = "URL Shortener";
     ViewData["Domain"] = "mc-csgo.ovh";
     ViewData["Menu"] = "navbar custom-navbar navbar-fixed-top";
+    ViewData["ReCaptchaKey"] = @_config["GoogleReCaptcha:key"];
 }
 
 <!-- FEATURE -->
@@ -32,7 +34,8 @@
                             <label asp-for="ShortUrl" class="label">Custom URL (optional):</label>
                             <input asp-for="ShortUrl" class="form-control" />
                         </div>
-
+                        <div class="g-recaptcha" data-sitekey="@ViewData["ReCaptchaKey"]"></div>
+                        
                     </form>
                 </div>
             </div>
@@ -42,5 +45,6 @@
 </section>
 
 @section Scripts {
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

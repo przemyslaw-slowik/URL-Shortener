@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using UrlShortener.Models;
 using UrlShortener.Services;
 using UrlShortener.ViewModels;
@@ -15,10 +16,12 @@ namespace UrlShortener.Controllers
     public class UrlController : Controller
     {
         private readonly IUrlModelData _urlModelData;
+        private readonly IConfiguration _config;
 
-        public UrlController(IUrlModelData urlModelData)
+        public UrlController(IUrlModelData urlModelData, IConfiguration configuration)
         {
             _urlModelData = urlModelData;
+            _config = configuration;
         }
 
         public async Task<IActionResult> Stats(int? page)
@@ -42,7 +45,7 @@ namespace UrlShortener.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(UrlEditModel model)
+        public async Task<IActionResult> Create(UrlEditModel model)
         {
             if (ModelState.IsValid)
             {
@@ -64,11 +67,18 @@ namespace UrlShortener.Controllers
                 }
                 else
                 {
-                    if (_urlModelData.Get(newUrl.ShortUrl) != null)
+                    if(_urlModelData.Get(newUrl.ShortUrl) != null)
                     {
                         ModelState.AddModelError("ShortUrl", "This custom url name is already taken.");
                         return View(nameof(Index));
                     }
+                }
+
+                if (!await GoogleRecaptchaHelper.IsReCaptchaPassedAsync(
+                    Request.Form["g-recaptcha-response"], _config["GoogleReCaptcha:secret"]))
+                {
+                    ModelState.AddModelError(string.Empty, "You failed the CAPTCHA");
+                    return View(nameof(Index));
                 }
 
                 newUrl = _urlModelData.Add(newUrl);
